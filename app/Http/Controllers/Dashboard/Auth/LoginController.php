@@ -29,8 +29,8 @@ class LoginController extends Controller
         }
     }
 
-    public function logout() {
-        auth()->guard('admin')->logout();
+    public function adminLogout() {
+        Auth::guard('admin')->logout();
         toast('Logout Successfully','success');
         return redirect()->route('admin.login');
     }

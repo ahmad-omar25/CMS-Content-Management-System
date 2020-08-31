@@ -35,9 +35,6 @@
     @include('dashboard.includes.sidebar')
     <div class="app-content content">
         <div class="content-wrapper">
-            <div class="content-header row">
-
-            </div>
             @yield('content')
         </div>
     </div>

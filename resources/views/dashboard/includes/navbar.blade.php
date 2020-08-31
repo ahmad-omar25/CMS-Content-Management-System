@@ -24,6 +24,7 @@
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">Hello,
                   <span class="user-name text-bold-700"></span>
+                    {{auth()->guard('admin')->user()->name}}
                 </span>
                             <span class="avatar avatar-online">
                   <img src="{{asset('dashboard/images/portrait/small/avatar-s-19.png')}}" alt="avatar"><i></i></span>

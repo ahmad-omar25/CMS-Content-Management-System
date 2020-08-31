@@ -24,6 +24,17 @@ Route::group(['prefix' => 'admin','middleware' => 'guest:admin', 'namespace' => 
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Dashboard', 'middleware' => 'auth:admin'], function () {
+
+    // Dashboard Home Page Route
     Route::get('/', 'HomeController@index')->name('admin.dashboard');
-    Route::any('logout', 'Auth\LoginController@logout')->name('admin.logout');
+
+    // Categories Route
+    Route::resource('categories', 'CategoryController');
+
+    // Posts Route
+    Route::resource('posts', 'PostController');
+
+    // Logout Route
+    Route::any('adminLogout', 'Auth\LoginController@adminLogout')->name('admin.logout');
+
 });
