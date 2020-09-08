@@ -12,20 +12,22 @@
     <!-- End Single Widget -->
     <!-- Start Single Widget -->
     <aside class="widget recent_widget">
-        <h3 class="widget-title">Recent</h3>
+        <h3 class="widget-title">Recent Posts</h3>
         <div class="recent-posts">
             <ul>
-                <li>
-                    <div class="post-wrapper d-flex">
-                        <div class="thumb">
-                            <a href=""><img src="{{asset('website/images/blog/sm-img/1.jpg')}}" alt="blog images"></a>
+                @foreach($recent_posts as $recent_post)
+                    <li>
+                        <div class="post-wrapper d-flex">
+                            <div class="thumb">
+                                <a href="{{route('post.show', $recent_post->slug)}}"><img src="{{asset('website/images/blog/sm-img/1.jpg')}}" alt="blog images"></a>
+                            </div>
+                            <div class="content">
+                                <h4><a href="{{route('post.show', $recent_post->slug)}}">{{\Illuminate\Support\Str::limit($recent_post->title, 15, '...')}}</a></h4>
+                                <p>{{$recent_post->created_at->format('M d, Y')}}</p>
+                            </div>
                         </div>
-                        <div class="content">
-                            <h4><a href="">Blog image post</a></h4>
-                            <p> March 10, 2015</p>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </aside>
@@ -34,17 +36,19 @@
     <aside class="widget comment_widget">
         <h3 class="widget-title">Comments</h3>
         <ul>
+            @foreach($recent_comments as $recent_comment)
             <li>
                 <div class="post-wrapper">
                     <div class="thumb">
                         <img src="{{asset('website/images/blog/comment/1.jpeg')}}" alt="Comment images">
                     </div>
                     <div class="content">
-                        <p>demo says:</p>
-                        <a href="#">Quisque semper nunc vitae...</a>
+                        <p>{{$recent_comment->name}}</p>
+                        <a href="#">{!! \Illuminate\Support\Str::limit($recent_comment->comment, 25, '...') !!}</a>
                     </div>
                 </div>
             </li>
+            @endforeach
         </ul>
     </aside>
     <!-- End Single Widget -->
@@ -52,13 +56,9 @@
     <aside class="widget category_widget">
         <h3 class="widget-title">Categories</h3>
         <ul>
-            <li><a href="#">Fashion</a></li>
-            <li><a href="#">Creative</a></li>
-            <li><a href="#">Electronics</a></li>
-            <li><a href="#">Kids</a></li>
-            <li><a href="#">Flower</a></li>
-            <li><a href="#">Books</a></li>
-            <li><a href="#">Jewelle</a></li>
+            @foreach($global_categories as $global_category)
+                <li><a href="#">{{$global_category->name}}</a></li>
+            @endforeach
         </ul>
     </aside>
     <!-- End Single Widget -->
@@ -66,11 +66,9 @@
     <aside class="widget archives_widget">
         <h3 class="widget-title">Archives</h3>
         <ul>
-            <li><a href="#">March 2015</a></li>
-            <li><a href="#">December 2014</a></li>
-            <li><a href="#">November 2014</a></li>
-            <li><a href="#">September 2014</a></li>
-            <li><a href="#">August 2014</a></li>
+            @foreach($global_archives as $key=>$val)
+            <li><a href="#">{{date("F", mktime(0, 0, 0, $key, 1)) . ' ' . $val}}</a></li>
+            @endforeach
         </ul>
     </aside>
     <!-- End Single Widget -->

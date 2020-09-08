@@ -36,7 +36,7 @@
                         <li class="drop"><a href="javascript:void (0)">Categories</a>
                             <div class="megamenu dropdown">
                                 <ul class="item item01">
-                                    @forelse($categories as $category)
+                                    @forelse($global_categories as $category)
                                         <li><a href="blog.html">{{$category->name}}</a></li>
                                     @empty
                                         ''

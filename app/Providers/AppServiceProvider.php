@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,10 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!request()->is('admin/*')) {
-            Paginator::defaultView('vendor.pagination.boighor');
-        }
-        view()->share('categories', Category::all());
         Schema::defaultStringLength(191);
     }
 }

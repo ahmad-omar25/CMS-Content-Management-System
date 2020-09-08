@@ -12,7 +12,7 @@ class CategoriesSeeder extends Seeder
      */
     public function run()
     {
-        Category::create(['name' => 'un-categories', 'status' => 1]);
+        Category::create(['name' => 'un-categorized', 'status' => 1]);
         Category::create(['name' => 'Natural', 'status' => 1]);
         Category::create(['name' => 'Flowers', 'status' => 1]);
         Category::create(['name' => 'Kitchen', 'status' => 0]);
