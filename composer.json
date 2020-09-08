@@ -19,6 +19,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
         "laravelcollective/html": "^6.1",
+        "nicolaslopezj/searchable": "^1.13",
+        "predis/predis": "^1.1",
         "realrashid/sweet-alert": "^3.1",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
@@ -46,6 +48,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Helpers/General.php"
         ]
     },
     "autoload-dev": {
