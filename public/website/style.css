@@ -1495,7 +1495,7 @@ Elements Styles
     visibility: visible; }
 .minicart-content-wrapper {
   width: 390px;
-  padding: 25px 20px;
+  padding: 0 20px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
   margin: 4px 0 0;
   min-width: 100%;
@@ -1568,9 +1568,9 @@ Elements Styles
     border-color: #ccc currentcolor;
     -o-border-image: none;
        border-image: none;
-    border-style: solid none;
+    border-style: none;
     border-width: 1px 0;
-    margin: 20px -20px 0;
+    margin: 0 -20px 0;
     overflow-x: auto;
     padding: 15px; }
     .minicart-content-wrapper .single__items .miniproduct .item01 .thumb {
@@ -1652,7 +1652,7 @@ Elements Styles
   transition: -webkit-transform 0.8s ease 0s, transform 0.8s ease 0s, opacity 0.5s ease 0s, visibility 0.5s ease 0s;
   visibility: hidden;
   z-index: 10;
-  padding-top: 20px; }
+  padding-top: 0; }
   .setting__block.is-visible {
     opacity: 1;
     visibility: visible; }
@@ -1741,7 +1741,7 @@ Elements Styles
           font-weight: normal;
           height: inherit;
           line-height: 20px;
-          padding: 5px 0;
+          padding: 10px 0;
           text-align: left;
           text-transform: capitalize;
           font-size: 12px; }
@@ -1836,9 +1836,9 @@ Header Styles
 			  overflow: visible;
 			  padding: 0;
 			  position: absolute;
-			  right: 0;
+              right: -2px;
 			  text-align: center;
-			  top: 44%;
+			  top: 39%;
 			  width: 16px;
 			}
     .header__area .header__sidebar__right > li.setting__bar__icon {
@@ -1895,7 +1895,7 @@ Header Styles
 		  background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shopcart > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+		  background: rgba(0, 0, 0, 0) url("images/icons/bell.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.setting__bar__icon > a {
 		  background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;
@@ -1916,7 +1916,7 @@ Header Styles
   background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;
 }
 .oth-page.header__area .header__sidebar__right > li.shopcart > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+  background: rgba(0, 0, 0, 0) url("images/icons/bell_white.png") no-repeat scroll 0 center;
 }
 .oth-page.header__absolute {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);

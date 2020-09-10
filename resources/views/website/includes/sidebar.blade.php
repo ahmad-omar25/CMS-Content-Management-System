@@ -44,7 +44,7 @@
                     </div>
                     <div class="content">
                         <p>{{$recent_comment->name}}</p>
-                        <a href="#">{!! \Illuminate\Support\Str::limit($recent_comment->comment, 25, '...') !!}</a>
+                        <a>{!! \Illuminate\Support\Str::limit($recent_comment->comment, 25, '...') !!}</a>
                     </div>
                 </div>
             </li>
@@ -57,7 +57,7 @@
         <h3 class="widget-title">Categories</h3>
         <ul>
             @foreach($global_categories as $global_category)
-                <li><a href="#">{{$global_category->name}}</a></li>
+                <li><a href="{{route('category', $global_category->slug)}}">{{$global_category->name}}</a></li>
             @endforeach
         </ul>
     </aside>
@@ -67,7 +67,7 @@
         <h3 class="widget-title">Archives</h3>
         <ul>
             @foreach($global_archives as $key=>$val)
-            <li><a href="#">{{date("F", mktime(0, 0, 0, $key, 1)) . ' ' . $val}}</a></li>
+            <li><a href="{{route('archive', $key . '-' . $val)}}">{{date("F", mktime(0, 0, 0, $key, 1)) . ' ' . $val}}</a></li>
             @endforeach
         </ul>
     </aside>
