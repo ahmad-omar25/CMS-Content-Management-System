@@ -6,6 +6,8 @@ Route::get('/', 'Website\WebsiteController@index')->name('homepage');
 
 Auth::routes();
 
+Route::get('/email/verify/{id}/{hash}',['as' => 'verification.verify','uses' => 'Auth\VerificationController@verify']);
+
 Route::group(['prefix' => 'CMS','namespace' => 'Website'], function () {
 
     Route::get('/', 'WebsiteController@index')->name('homepage'); // Homepage
