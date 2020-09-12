@@ -12,8 +12,20 @@ Route::group(['prefix' => 'CMS','namespace' => 'Website'], function () {
 
     Route::get('/', 'WebsiteController@index')->name('homepage'); // Homepage
 
-    // Logout
-    Route::get('user/logout', 'WebsiteController@user_logout')->name('user.logout');
+
+    Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
+
+        // Logout
+        Route::get('logout', 'WebsiteController@user_logout')->name('user.logout');
+
+        // User Profile
+        Route::resource('profile', 'UserController');
+
+        // User Posts
+        Route::resource('posts', 'PostController');
+    });
+
+
 
     // Contact Us
     Route::get('contact', 'WebsiteController@contact')->name('contact.us');

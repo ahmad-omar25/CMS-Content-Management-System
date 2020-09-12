@@ -82,9 +82,8 @@
                                         <div class="switcher-options">
                                             <div class="switcher-currency-trigger">
                                                 <div class="setting__menu">
-                                                    <span><a href="#">Profile</a></span>
-                                                    <span><a href="#">Edit Profile</a></span>
-                                                    <span><a href="{{ route('user.logout') }}">Sign In</a></span>
+                                                    <span><a href="{{route('profile.index')}}">Profile</a></span>
+                                                    <span><a href="{{ route('user.logout') }}">Logout</a></span>
                                                 </div>
                                             </div>
                                         </div>

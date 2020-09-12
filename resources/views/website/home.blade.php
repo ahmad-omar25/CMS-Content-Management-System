@@ -12,7 +12,7 @@
                                 <div class="thumb">
                                     <a href="{{route('post.show', $post->slug)}}">
                                         @if ($post->media->count() > 0)
-                                            <img src="{{asset('assets/posts' . $post->media->first()->file_name)}}" alt="{{$post->title}}">
+                                            <img src="{{asset('assets/posts/' . $post->media->first()->file_name)}}" alt="{{$post->title}}">
                                         @else
                                             <img src="{{asset('website/images/blog/blog-3/1.jpg')}}" alt="blog images">
                                         @endif
@@ -44,4 +44,5 @@
         </div>
     </div>
     <!-- End Blog Area -->
+    @include('sweetalert::alert')
 @stop
