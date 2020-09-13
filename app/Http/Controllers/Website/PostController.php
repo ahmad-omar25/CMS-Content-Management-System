@@ -54,4 +54,12 @@ class PostController extends Controller
         toast('Created Post Successfully','success');
         return redirect()->back();
     }
+
+    public function edit($id) {
+        $post = Post::whereSlug($id)->orWhere('id', $id)->whereUserId(auth()->id())->first();
+        if ($post) {
+            $categories = Category::whereStatus(1)->get(['name', 'id']);
+            return view('website.users.posts.edit', compact('post', 'categories'));
+        }
+    }
 }
