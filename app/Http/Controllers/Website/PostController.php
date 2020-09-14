@@ -75,6 +75,7 @@ class PostController extends Controller
             $data['comment_able'] = $request->input('comment_able');
             $data['category_id'] = $request->input('category_id');
             $post->update($data);
+            Cache::forget('recent_posts');
         }
 
         if ($request->images && count($request->images) > 0) {
@@ -102,10 +103,6 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function show() {
-        //
-    }
-
     public function post_media_destroy($id) {
         $media = PostMedia::whereId($id)->first();
         if($media) {
@@ -129,6 +126,7 @@ class PostController extends Controller
                 }
             }
             $post->delete();
+            Cache::forget('recent_posts');
             toast('Deleted Post Successfully','success');
             return redirect()->route('posts.index');
         }
