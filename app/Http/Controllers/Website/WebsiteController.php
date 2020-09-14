@@ -49,11 +49,8 @@ class WebsiteController extends Controller
     public function store_comment(Request $request, $slug) {
         $post = Post::whereSlug($slug)->wherePostType('post')->whereStatus(1)->first();
         if ($post) {
-            $userId = auth()->check() ? auth()->id() : null;
-            $data['name'] = $request->input('name');
-            $data['email'] = $request->input('email');
+            $userId = auth()->id();
             $data['comment'] = $request->input('comment');
-            $data['url'] = $request->input('url');
             $data['ip_address'] = $request->ip();
             $data['post_id'] = $post->id;
             $data['user_id'] = $userId;

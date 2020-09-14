@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-blog bg--white section-padding--lg blog-sidebar right-sidebar">
         <div class="container">
-            <h2 class="mb-1">Create Post</h2>
+            <h3 class="mb-1">Create Post</h3>
             <hr class="mb-4" style="width: 74%">
             <div class="row">
                 <div class="col-lg-9 col-12">
@@ -91,8 +91,8 @@
                                     <div class="col-md-12">
                                         <div class="input__box">
                                             @php $input = "images[]" @endphp
-                                            <label for="exampleFormControlFile1">Post Images<span>*</span></label>
-                                            <input type="file" id="post-images" name="{{$input}}" multiple class="form-control-file" id="exampleFormControlFile1">
+                                            <label for="post-images">Post Images<span>*</span></label>
+                                            <input type="file" id="post-images" name="{{$input}}" multiple class="form-control-file">
                                         </div>
                                     </div>
                                 </div>

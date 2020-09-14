@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="content">
                                                 <div class="comnt__author d-block d-sm-flex">
-                                                    <span><a href="{{$comment->url ? $comment->url : '#'}}">{{$comment->name}}</a></span>
+                                                    <span><a href="{{$comment->url ? $comment->url : '#'}}">{{$comment->user->name}}</a></span>
                                                     <span>{{$comment->created_at->format('M d, Y , h:i a')}}</span>
                                                 </div>
                                                 <p>{{$comment->comment}}</p>
@@ -85,31 +85,21 @@
                                 @endforelse
                             </ul>
                         </div>
-                        <div class="comment_respond">
-                            <h3 class="reply_title">Leave a Reply</h3>
-                             {!! Form::open(['route' => ['post.add_comment', $post->slug], 'method' => 'post', 'class' => 'comment__form']) !!}
+                        @if (auth()->check())
+                            <div class="comment_respond">
+                                <h3 class="reply_title">Leave a Reply</h3>
+                                {!! Form::open(['route' => ['post.add_comment', $post->slug], 'method' => 'post', 'class' => 'comment__form']) !!}
+                                <div class="input__box">
+                                    {!! Form::textarea('comment', old('comment'), ['placeholder' => 'Your comment here']) !!}
+                                </div>
+                                <div class="submite__btn">
+                                    {!! Form::submit('Post Comment', ['class' => 'btn btn-primary']) !!}
+                                </div>
 
-                            <p>Your email address will not be published.Required fields are marked </p>
-                            <div class="input__box">
-                                {!! Form::textarea('comment', old('comment'), ['placeholder' => 'Your comment here']) !!}
+                                {!! Form::close() !!}
                             </div>
-                            <div class="input__wrapper clearfix">
-                                <div class="input__box name one--third">
-                                    {!! Form::text('name', old('name'), ['placeholder' => 'Your name here']) !!}
-                                </div>
-                                <div class="input__box email one--third">
-                                    {!! Form::email('email', old('email'), ['placeholder' => 'Your email here']) !!}
-                                </div>
-                                <div class="input__box website one--third">
-                                    {!! Form::text('ulr', old('ulr'), ['placeholder' => 'Your URL here']) !!}
-                                </div>
-                            </div>
-                            <div class="submite__btn">
-                                {!! Form::submit('Post Comment', ['class' => 'btn btn-primary']) !!}
-                            </div>
+                        @endif
 
-                            {!! Form::close() !!}
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">

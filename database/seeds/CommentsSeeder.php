@@ -28,9 +28,6 @@ class CommentsSeeder extends Seeder
             $current_date = Carbon::now()->timestamp;
 
             $comments[] = [
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'url' => $faker->url,
                 'ip_address' => $faker->ipv4,
                 'comment' => $faker->paragraph(2, true),
                 'status' => rand(0, 1),

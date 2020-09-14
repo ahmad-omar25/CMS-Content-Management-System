@@ -19,7 +19,12 @@ Route::group(['prefix' => 'CMS','namespace' => 'Website'], function () {
         Route::get('logout', 'WebsiteController@user_logout')->name('user.logout');
 
         // User Profile
-        Route::resource('profile', 'UserController');
+        Route::resource('profile', 'UserController')->except('show');
+        Route::get('password', 'UserController@update_password_index')->name('profile.password');
+        Route::post('password/update/{id}', 'UserController@update_password')->name('update.password');
+
+        // Edit Post Delete Image
+        Route::post('/delete-post-media/{media_id}', 'PostController@post_media_destroy')->name('post.media.destroy');
 
         // User Posts
         Route::resource('posts', 'PostController');

@@ -3,7 +3,7 @@
     <div class="page-blog bg--white section-padding--lg blog-sidebar right-sidebar">
         <div class="container">
             @if(isset($posts) && $posts->count() > 0)
-            <h2 class="mb-1">My Posts</h2>
+            <h3 class="mb-1">My Posts</h3>
             <hr class="mb-4" style="width: 74%">
             @endif
             <div class="row">
@@ -25,20 +25,20 @@
                                             <div class="actions_inner">
                                                 <ul class="add_to_links">
                                                     <li><a class="cart" href="{{route('posts.edit', $post->slug)}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                    <form action="{{route('posts.destroy', $post->slug)}}" style="display: inline-block" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <li>
+                                                            <button class="wishlist" style="border: 0 none;margin-right: 8px;border-radius: 100%;display: inline-block;font-size: 16px;font-weight: normal;height: 36px;line-height: 40px;padding: 0;position: relative;background: #f5f5f5;color: #333;text-align: center;width: 36px;transition: all 300ms ease-in 0s;    box-shadow: none;outline: none;">
+                                                                <i class="bi bi-responsive-device"></i>
+                                                            </button>
+                                                        </li>
+                                                    </form>
+
                                                     <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                     <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                                 </ul>
                                             </div>
-                                        </div>
-                                        <div class="product__hover--content">
-                                            <ul class="rating d-flex">
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li class="on"><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -58,4 +58,5 @@
             </div>
         </div>
     </div>
+    @include('sweetalert::alert')
 @endsection

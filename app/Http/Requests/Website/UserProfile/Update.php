@@ -11,7 +11,10 @@ class Update extends FormRequest
         return [
             'name' => 'required|max:150|unique:users,name,' . $this->input('id'),
             'email' => 'required|email|unique:users,email,' . $this->input('id'),
-            'password' => 'nullable|confirmed|min:8',
+            'mobile' => 'nullable|numeric|min:11|unique:users,mobile,' . $this->input('id'),
+            'user_image' => 'nullable|image|max:2000|mimes:jpg,jpeg,png',
+            'bio' => 'nullable|max:100',
+            'password' => 'required|confirmed|min:8',
         ];
     }
 

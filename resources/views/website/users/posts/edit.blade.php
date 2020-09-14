@@ -2,12 +2,13 @@
 @section('content')
     <div class="page-blog bg--white section-padding--lg blog-sidebar right-sidebar">
         <div class="container">
-            <h2 class="mb-1">Edit Post</h2>
+            <h3 class="mb-1">Edit Post {{$post->title}}</h3>
             <hr class="mb-4" style="width: 74%">
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="my__account__wrapper">
-                        <form method="POST" action="{{ route('posts.update', $post->slug) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('posts.update', $post->id) }}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="account__form m-0">
@@ -26,8 +27,9 @@
                                 <div class="input__box">
                                     @php $input = "description" @endphp
                                     <label>Description<span>*</span></label>
-                                    <textarea name="{{$input}}" id="" class="form-control @error($input) is-invalid @enderror" cols="30" rows="10">{{$post->description}}</textarea>
-
+                                    <textarea name="{{$input}}" id="summernote"
+                                              class="form-control @error($input) is-invalid @enderror" cols="30"
+                                              rows="10">{{$post->description}}</textarea>
                                     @error($input)
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -43,7 +45,8 @@
                                                     class="form-control @error($input) is-invalid @enderror">
                                                 <option disabled selected>Select Category</option>
                                                 @forelse($categories as $category)
-                                                    <option value="{{$category->id}}" @if ($category->category_id == $category->id) selected @endif>{{$category->name}}</option>
+                                                    <option
+                                                        value="{{$category->id}}" {{$post->category->id  == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                                                 @empty
                                                     No Category
                                                 @endforelse
@@ -62,8 +65,10 @@
                                             <select name="{{$input}}"
                                                     class="form-control @error($input) is-invalid @enderror">
                                                 <option disabled selected>Select Status</option>
-                                                <option value="1" {{isset($post) && $post->{$input} == 1 ? 'selected' : ''}}>Active</option>
-                                                <option value="0" {{isset($post) && $post->{$input} == 0 ? 'selected' : ''}}>Inactive</option>
+                                                <option value="1" {{$post->{$input} == 1 ? 'selected' : ''}}>Active
+                                                </option>
+                                                <option value="0" {{$post->{$input} == 0 ? 'selected' : ''}}>Inactive
+                                                </option>
                                             </select>
                                             @error($input)
                                             <span class="invalid-feedback" role="alert">
@@ -79,8 +84,9 @@
                                             <select name="{{$input}}"
                                                     class="form-control @error($input) is-invalid @enderror">
                                                 <option disabled selected>Select Comment</option>
-                                                <option value="1" {{isset($post) && $post->{$input} == 1 ? 'selected' : ''}}>Yes</option>
-                                                <option value="0" {{isset($post) && $post->{$input} == 0 ? 'selected' : ''}}>No</option>
+                                                <option value="1" {{$post->{$input} == 1 ? 'selected' : ''}}>Yes
+                                                </option>
+                                                <option value="0" {{$post->{$input} == 0 ? 'selected' : ''}}>No</option>
                                             </select>
                                             @error($input)
                                             <span class="invalid-feedback" role="alert">
@@ -93,7 +99,8 @@
                                         <div class="input__box">
                                             @php $input = "images[]" @endphp
                                             <label for="post-images">Post Images<span>*</span></label>
-                                            <input type="file" id="post-images" name="{{$input}}" multiple class="form-control-file">
+                                            <input type="file" id="post-images" name="{{$input}}" multiple
+                                                   class="form-control-file">
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +122,8 @@
     @include('sweetalert::alert')
 @endsection
 @section('script')
-    <link href="{{url('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css')}}" rel="stylesheet">
+    <link href="{{url('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css')}}"
+          rel="stylesheet">
     <script src="{{url('https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js')}}"></script>
     <script>
         $(function () {
@@ -143,20 +151,26 @@
                 initialPreview: [
                     @if($post->media->count() > 0)
                         @foreach($post->media as $media)
-                            "{{asset('assets/posts/' . $media->file_name)}}"
-                        @endforeach
+                        "{{ asset('assets/posts/' . $media->file_name) }}",
+                    @endforeach
                     @endif
                 ],
                 initialPreviewAsData: true,
                 initialPreviewFileType: 'image',
                 initialPreviewConfig: [
-                    @if($post->media->count() > 0)
+                        @if($post->media->count() > 0)
                         @foreach($post->media as $media)
-                        {caption: "{{$media->file_name}}", size: {{$media->file_size}}, width: "120px"}
+                        {
+                            caption: "{{ $media->file_name }}",
+                            size: {{ $media->file_size }},
+                            width: "120px",
+                            url: "{{ route('post.media.destroy', [$media->id, '_token' => csrf_token()]) }}",
+                            key: "{{ $media->id }}"
+                        },
                     @endforeach
                     @endif
-                ]
-            });
+                ],
+            })
         });
     </script>
-@stop
+@endsection
