@@ -25,6 +25,8 @@
     <!-- Cusom css -->
     <link rel="stylesheet" href="{{asset('website/css/custom.css')}}">
 
+    @yield('wizardCss')
+
     <!-- Bootstrap File input -->
     <link href="{{asset('website/bootstrap-fileinput/css/fileinput.min.css')}}" media="all" rel="stylesheet" type="text/css" />
     <!-- Modernizer js -->
@@ -85,8 +87,9 @@
 <script src="{{asset('website/bootstrap-fileinput/js/fileinput.min.js')}}"></script>
 <script src="{{asset('website/bootstrap-fileinput/themes/fa/theme.js')}}"></script>
 
-@yield('script')
+@yield('wizard')
 
+@yield('script')
 
 </body>
 </html>

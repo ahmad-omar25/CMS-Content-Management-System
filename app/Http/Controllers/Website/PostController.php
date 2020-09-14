@@ -7,7 +7,6 @@ use App\Http\Requests\Website\Posts\Store;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\PostMedia;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
