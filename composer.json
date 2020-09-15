@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "beyondcode/laravel-websockets": "^1.7",
         "cviebrock/eloquent-sluggable": "^7.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -21,7 +22,9 @@
         "laravelcollective/html": "^6.1",
         "nicolaslopezj/searchable": "^1.13",
         "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "~4.0",
         "realrashid/sweet-alert": "^3.1",
+        "spatie/laravel-backup": "^6.11",
         "stevebauman/purify": "^3.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

@@ -6,5 +6,10 @@
         <entry key="createController.singleAction" value="true" />
       </map>
     </option>
+    <option name="generationStringOptionValues">
+      <map>
+        <entry key="createNotification.type" value="database" />
+      </map>
+    </option>
   </component>
 </project>

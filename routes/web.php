@@ -19,7 +19,7 @@ Route::group(['prefix' => 'CMS','namespace' => 'Website'], function () {
         Route::get('logout', 'WebsiteController@user_logout')->name('user.logout');
 
         // User Profile
-        Route::resource('profile', 'UserController')->except('show');
+        Route::resource('profile', 'UserController')->except('edit', 'destroy', 'create', 'store', 'show');
 
 
         // Edit Post Delete Image

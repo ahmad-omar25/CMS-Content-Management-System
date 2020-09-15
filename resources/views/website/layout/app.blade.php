@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{asset('website/images/favicon.ico')}}">
     <link rel="apple-touch-icon" href="{{asset('website/images/icon.png')}}">
