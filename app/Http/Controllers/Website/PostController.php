@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = auth()->user()->posts()->with(['category', 'comments', 'media', 'user'])->withCount('comments')->orderBy('id', 'desc')->paginate(8);
+        $posts = auth()->user()->posts()->with(['media'])->orderBy('id', 'desc')->paginate(8);
         return view('website.users.posts.index', compact('posts'));
     }
 

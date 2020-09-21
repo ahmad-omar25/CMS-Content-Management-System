@@ -10,7 +10,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('dashboard.categories.index');
+        $categories = Category::orderBy('id', 'desc')->paginate(8);
+        return view('dashboard.categories.index', compact('categories'));
     }
 
 

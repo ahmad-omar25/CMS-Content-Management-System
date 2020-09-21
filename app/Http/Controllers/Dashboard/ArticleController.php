@@ -6,15 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 
-
-class PostController extends Controller
+class ArticleController extends Controller
 {
-
-    public function index(Request $request)
+    public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(8);
         return view('dashboard.posts.index', compact('posts'));
     }
 

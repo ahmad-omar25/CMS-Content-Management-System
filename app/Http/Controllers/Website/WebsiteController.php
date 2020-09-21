@@ -15,14 +15,14 @@ class WebsiteController extends Controller
     // View Homepage
     public function index()
     {
-        $posts = Post::with(['category', 'user', 'media'])
+        $posts = Post::with(['user', 'media'])
             ->whereHas('category', function ($q) {
                 $q->whereStatus(1);
             })
             ->whereHas('user', function ($q) {
                 $q->whereStatus(1);
             })
-            ->wherePostType('post')->whereStatus(1)->orderBy('id', 'desc')->paginate(5);
+            ->post()->active()->orderBy('id', 'desc')->paginate(5);
         return view('website.home', compact('posts'));
     }
 
@@ -47,7 +47,7 @@ class WebsiteController extends Controller
 
     // Store comments
     public function store_comment(Request $request, $slug) {
-        $post = Post::whereSlug($slug)->wherePostType('post')->whereStatus(1)->first();
+        $post = Post::whereSlug($slug)->post()->active()->first();
         if ($post) {
             $userId = auth()->id();
             $data['comment'] = $request->input('comment');
@@ -75,7 +75,7 @@ class WebsiteController extends Controller
     // Search post
     public function search(Request $request) {
         $keyword = isset($request->keyword)  && $request->keyword != '' ? $request->keyword : null;
-        $posts = Post::with(['category', 'user', 'media'])
+        $posts = Post::with(['user', 'media'])
             ->whereHas('category', function ($q) {
                 $q->whereStatus(1);
             })
@@ -86,20 +86,18 @@ class WebsiteController extends Controller
         if ($keyword != null) {
             $posts = $posts->search($keyword, null, true);
         }
-        $posts = $posts->wherePostType('post')->whereStatus(1)->orderBy('id', 'desc')->paginate(5);
+        $posts = $posts->post()->active()->orderBy('id', 'desc')->paginate(5);
         return view('website.home', compact('posts'));
     }
 
     // Filter with category
     public function category($slug) {
-        $category = Category::whereSlug($slug)->orWhere('id', $slug)->whereStatus(1)->first()->id;
+        $category = Category::whereSlug($slug)->orWhere('id', $slug)->active()->first()->id;
 
         if ($category) {
-            $posts = Post::with(['media', 'user', 'category'])
-                ->withCount('approved_comments')
+            $posts = Post::with(['media', 'user'])
                 ->whereCategoryId($category)
-                ->wherePostType('post')
-                ->whereStatus(1)
+                ->post()->active()
                 ->orderBy('id', 'desc')
                 ->paginate(5);
             return view('website.home', compact('posts'));
@@ -112,12 +110,11 @@ class WebsiteController extends Controller
         $exploded_date = explode('-', $date);
         $month = $exploded_date[0];
         $year = $exploded_date[1];
-        $posts = Post:: with(['media', 'user', 'category'])
-            ->withCount('approved_comments')
+        $posts = Post:: with(['media', 'user'])
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
-            ->wherePostType('post')
-            ->whereStatus(1)
+            ->post()
+            ->active()
             ->orderBy('id', 'desc')
             ->paginate(5);
         return view('website.home', compact('posts'));
@@ -128,11 +125,10 @@ class WebsiteController extends Controller
         $user = User::whereName($username)->first()->id;
 
         if ($user) {
-            $posts = Post::with(['media', 'user', 'category'])
-                ->withCount('approved_comments')
+            $posts = Post::with(['media', 'user'])
                 ->whereUserId($user)
-                ->wherePostType('post')
-                ->whereStatus(1)
+                ->post()
+                ->active()
                 ->orderBy('id', 'desc')
                 ->paginate(5);
             return view('website.home', compact('posts'));

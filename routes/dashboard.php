@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Dashboard', 'middleware' => '
     Route::resource('categories', 'CategoryController');
 
     // Posts Route
-   // Route::resource('posts', 'PostController');
+    Route::resource('articles', 'ArticleController');
 
     // Logout Route
     Route::any('adminLogout', 'Auth\LoginController@adminLogout')->name('admin.logout');

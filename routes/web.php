@@ -8,12 +8,12 @@ Auth::routes();
 
 Route::get('/email/verify/{id}/{hash}',['as' => 'verification.verify','uses' => 'Auth\VerificationController@verify']);
 
-Route::group(['prefix' => 'CMS','namespace' => 'Website'], function () {
+Route::group(['prefix' => 'cms','namespace' => 'Website'], function () {
 
     Route::get('/', 'WebsiteController@index')->name('homepage'); // Homepage
 
 
-    Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
+    Route::group(['middleware' => 'auth:web', 'prefix' => 'user'], function () {
 
         // Logout
         Route::get('logout', 'WebsiteController@user_logout')->name('user.logout');
@@ -51,3 +51,7 @@ Route::group(['prefix' => 'CMS','namespace' => 'Website'], function () {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

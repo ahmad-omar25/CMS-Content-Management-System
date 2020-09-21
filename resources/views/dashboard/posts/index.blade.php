@@ -6,9 +6,12 @@
             <tr>
                 <th>#</th>
                 <th>title</th>
-                <th>content</th>
+                <th>Description</th>
+                <th>Post By</th>
+                <th>Post Status</th>
                 <th>Category</th>
                 <th>image</th>
+                <th>Comments Count</th>
             </tr>
             </thead>
             <tbody>
@@ -16,9 +19,14 @@
             <tr>
                 <td>{{$index + 1}}</td>
                 <td>{{$post->title}}</td>
-                <td>{{$post->content}}</td>
+                <td>{!! \Illuminate\Support\Str::limit($post->description, 30, '...') !!}</td>
+                @if ($post->has('user'))
+                    <td>{{$post->user->name}}</td>
+                @endif
+                <td>{{$post->status}}</td>
                 <td>{{$post->category->name}}</td>
-                <td>{{$post->image}}</td>
+                <td>{{$post->media->count()}}</td>
+                <td>{{$post->comments->count()}}</td>
             </tr>
             @endforeach
             </tbody>

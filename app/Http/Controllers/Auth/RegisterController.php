@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -65,10 +68,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        if (isset($data['user_image'])) {
+            if ($image = $data['user_image']){
+                $filename = Str::slug($data['name']) . '.' . $image->getClientOriginalExtension();
+                $path = public_path('/assets/users/' . $filename);
+                Image::make($image->getRealPath())->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path, 100);
+                $user->update(['user_image' => $filename]);
+            }
+        }
+        return $user;
     }
+
+    protected function registered(Request $request, $user)
+    {
+        toast('Created successfully please active your email','success');
+        return redirect()->route('homepage');
+    }
+
 }
